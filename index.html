@@ -1,0 +1,2980 @@
+[source: 1]<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <title>GW Work</title>
+  <style>
+/* =====================================================
+   GW Work — Apple-inspired design system
+   ===================================================== */
+
+:root {
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #fafafc;
+  --text: #1d1d1f;
+  --text-2: #6e6e73;
+  --text-3: #86868b;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  --fill: rgba(120, 120, 128, 0.12);
+  --fill-2: rgba(120, 120, 128, 0.2);
+  --accent: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-soft: rgba(0, 113, 227, 0.1);
+  --danger: #ff3b30;
+  --danger-soft: rgba(255, 59, 48, 0.1);
+  --success: #34c759;
+  --glass: rgba(255, 255, 255, 0.72);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --sidebar: 250px;
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --surface-2: #2c2c2e;
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #86868b;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --fill: rgba(120, 120, 128, 0.24);
+  --fill-2: rgba(120, 120, 128, 0.36);
+  --accent: #2997ff;
+  --accent-hover: #3da1ff;
+  --accent-soft: rgba(41, 151, 255, 0.16);
+  --danger: #ff453a;
+  --danger-soft: rgba(255, 69, 58, 0.16);
+  --success: #30d158;
+  --glass: rgba(28, 28, 30, 0.72);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+    "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.47;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+}
+
+.hidden { display: none !important; }
+
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+h1 { font-size: 40px; }
+h2 { font-size: 28px; }
+h3 { font-size: 19px; letter-spacing: -0.01em; }
+
+.sub { color: var(--text-2); font-size: 17px; margin-top: 8px; }
+.muted { color: var(--text-2); }
+.small { font-size: 13px; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:disabled { cursor: default; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 980px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.18s var(--ease), transform 0.18s var(--ease), opacity 0.18s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-secondary { background: var(--fill); color: var(--text); }
+.btn-secondary:hover { background: var(--fill-2); }
+.btn-danger { background: var(--danger-soft); color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: #fff; }
+.btn-sm { height: 36px; padding: 0 16px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: 0.45; transform: none; }
+
+.link {
+  color: var(--accent);
+  font-weight: 500;
+  padding: 0;
+}
+.link:hover { text-decoration: underline; }
+
+.icon-btn {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--fill);
+  color: var(--text-2);
+  transition: background 0.18s;
+}
+.icon-btn:hover { background: var(--fill-2); color: var(--text); }
+.icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ---------- Fields ---------- */
+
+.field { position: relative; margin-bottom: 14px; }
+
+.field input, .field textarea,
+.search input {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 20px 16px 8px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field textarea { resize: vertical; min-height: 110px; line-height: 1.45; }
+
+.field label {
+  position: absolute;
+  left: 17px;
+  top: 15px;
+  font-size: 15px;
+  color: var(--text-3);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 0.16s var(--ease), color 0.16s;
+}
+.field input:focus ~ label,
+.field textarea:focus ~ label,
+.field input:not(:placeholder-shown) ~ label,
+.field textarea:not(:placeholder-shown) ~ label {
+  transform: translateY(-9px) scale(0.78);
+}
+.field input:focus, .field textarea:focus, .search input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.field input:focus ~ label, .field textarea:focus ~ label { color: var(--accent); }
+
+.field .reveal-pw {
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  padding: 6px 8px;
+}
+.field:has(.reveal-pw) input { padding-right: 70px; }
+
+.form-error {
+  color: var(--danger);
+  font-size: 14px;
+  min-height: 20px;
+  margin: -4px 0 8px 2px;
+}
+.form-error:empty { display: none; }
+
+.form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 6px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+
+/* ---------- Segmented control ---------- */
+
+.segmented {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  background: var(--fill);
+  border-radius: 10px;
+  padding: 2px;
+  margin-bottom: 18px;
+  user-select: none;
+}
+.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented label {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.18s;
+}
+.segmented input:checked + label { color: var(--text); }
+.segmented input:focus-visible + label { outline: 3px solid var(--accent); }
+.segmented-thumb {
+  position: absolute;
+  top: 2px; bottom: 2px; left: 2px;
+  width: calc((100% - 4px) / var(--count, 2));
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transform: translateX(calc(var(--idx, 0) * 100%));
+  transition: transform 0.22s var(--ease);
+}
+.segmented.small { margin: 0; }
+.segmented.small label { padding: 7px 14px; font-size: 13px; }
+
+/* ---------- Chips ---------- */
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 20px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  border-radius: 980px;
+  background: var(--fill);
+  font-size: 13px;
+  font-weight: 500;
+}
+.chip button {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1;
+}
+.chip button:hover { background: var(--fill-2); color: var(--text); }
+.chip.soft { background: var(--accent-soft); color: var(--accent); }
+
+/* =====================================================
+   AUTH
+   ===================================================== */
+
+.auth {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+
+.auth-visual {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 64px;
+  color: #fff;
+  background:
+    radial-gradient(1000px 700px at 15% 0%, #64d2ff 0%, transparent 60%),
+    radial-gradient(900px 700px at 95% 100%, #ff8fd1 0%, transparent 60%),
+    radial-gradient(800px 600px at 70% 45%, #5e5ce6 0%, transparent 60%),
+    #0a84ff;
+}
+.auth-mark {
+  font-size: clamp(120px, 20vw, 260px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  margin-left: -0.06em;
+  text-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+.auth-claim {
+  margin-top: 28px;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  opacity: 0.92;
+}
+
+.auth-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+.auth-card { width: 100%; max-width: 400px; }
+.auth-brand { display: none; font-size: 30px; font-weight: 700; letter-spacing: -0.05em; margin-bottom: 28px; }
+.auth-form h1 { font-size: 34px; }
+.auth-form .sub { margin-bottom: 28px; }
+.auth-form .btn-block { margin-top: 6px; }
+.switch { text-align: center; margin-top: 22px; color: var(--text-2); font-size: 14px; }
+.auth-foot { margin-top: 32px; color: var(--text-3); font-size: 12px; text-align: center; }
+
+/* =====================================================
+   APP SHELL
+   ===================================================== */
+
+.app { min-height: 100dvh; display: flex; }
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  width: var(--sidebar);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 14px 18px;
+  background: var(--glass);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-right: 1px solid var(--line);
+}
+
+.brand {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  padding: 0 12px;
+  margin-bottom: 26px;
+}
+
+.user-mini {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  margin-bottom: 18px;
+  transition: background 0.18s;
+}
+.user-mini:hover { background: var(--fill); }
+.user-text { min-width: 0; display: flex; flex-direction: column; }
+.user-text strong { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-text small { color: var(--text-2); font-size: 13px; }
+
+.avatar {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, hsl(var(--h, 210) 80% 60%), hsl(calc(var(--h, 210) + 40) 80% 50%));
+}
+.avatar-lg { width: 72px; height: 72px; font-size: 28px; }
+.avatar-sm { width: 32px; height: 32px; font-size: 13px; }
+
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  text-align: left;
+  transition: background 0.16s, color 0.16s;
+}
+.nav-btn svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; opacity: 0.9; }
+.nav-btn:hover { background: var(--fill); color: var(--text); }
+.nav-btn.active { background: var(--accent-soft); color: var(--accent); }
+.nav-btn .badge { margin-left: auto; }
+
+.sidebar-foot { margin-top: auto; display: flex; flex-direction: column; gap: 2px; padding-top: 14px; border-top: 1px solid var(--line); }
+
+.badge {
+  min-width: 20px; height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.badge-dot { position: absolute; top: 6px; right: calc(50% - 16px); min-width: 8px; width: 8px; height: 8px; padding: 0; }
+
+/* ---------- Main ---------- */
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 56px 48px 96px;
+}
+.page { display: none; max-width: 980px; margin: 0 auto; }
+.page.active { display: block; animation: pageIn 0.28s var(--ease); }
+@keyframes pageIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.page-head { margin-bottom: 32px; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+}
+.panel + .panel, .cards + .panel { margin-top: 20px; }
+.panel h3 { margin-bottom: 18px; }
+.panel-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+.panel-head h3 { margin: 0; }
+
+/* =====================================================
+   DASHBOARD
+   ===================================================== */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 48px;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background:
+    radial-gradient(900px 500px at 100% 0%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+    radial-gradient(700px 400px at 0% 100%, #ff8fd1 0%, transparent 60%),
+    linear-gradient(135deg, #0a84ff, #5e5ce6);
+}
+.hero-copy { max-width: 460px; position: relative; }
+.hero h2 { font-size: 40px; letter-spacing: -0.03em; margin-bottom: 14px; }
+.hero p { font-size: 18px; opacity: 0.9; margin-bottom: 26px; line-height: 1.4; }
+.hero .btn-primary { background: #fff; color: #1d1d1f; }
+.hero .btn-primary:hover { background: #f5f5f7; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+.stat {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s var(--ease), border-color 0.18s;
+}
+.stat:hover { border-color: var(--line-strong); }
+.stat:active { transform: scale(0.985); }
+.stat strong { display: block; font-size: 40px; font-weight: 600; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+.stat span { color: var(--text-2); font-size: 14px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.two-col .panel { margin-top: 0; min-width: 0; }
+
+.list { display: flex; flex-direction: column; }
+.list-item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  padding: 12px 4px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  border-radius: 6px;
+}
+.list-item:first-child { border-top: 0; }
+.list-item:hover { background: var(--surface-2); }
+.list-text { min-width: 0; flex: 1; }
+.list-text strong { display: block; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list-text span { display: block; color: var(--text-2); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.list-meta { color: var(--text-3); font-size: 12px; flex-shrink: 0; }
+
+/* =====================================================
+   JOBS
+   ===================================================== */
+
+.toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+.search { position: relative; flex: 1; min-width: 220px; }
+.search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; fill: var(--text-3); }
+.search input { padding: 11px 14px 11px 42px; border-radius: 980px; font-size: 15px; }
+.search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 6px; }
+.card-head h3 { margin: 0; }
+.card .budget { font-weight: 600; white-space: nowrap; color: var(--text); font-size: 15px; }
+.card .desc { color: var(--text-2); font-size: 14px; line-height: 1.5; margin: 6px 0 14px; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card .chips { margin: 0 0 16px; }
+.card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.card-foot .meta { color: var(--text-3); font-size: 13px; }
+.card-actions { display: flex; gap: 8px; }
+.card.closed { opacity: 0.7; }
+.tag { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 980px; background: var(--fill); color: var(--text-2); }
+.tag.ok { background: rgba(52, 199, 89, 0.15); color: #1f8a3a; }
+[data-theme="dark"] .tag.ok { color: var(--success); }
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text-2);
+}
+.empty strong { display: block; color: var(--text); font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+.empty span { display: block; font-size: 14px; }
+.empty .btn { margin-top: 18px; }
+
+.list .empty { border: 0; padding: 28px 8px; }
+
+/* =====================================================
+   MESSAGES
+   ===================================================== */
+
+.chat {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  height: min(640px, calc(100dvh - 260px));
+  min-height: 420px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.threads { border-right: 1px solid var(--line); overflow-y: auto; padding: 8px; }
+.thread {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  transition: background 0.16s;
+}
+.thread:hover { background: var(--fill); }
+.thread.active { background: var(--accent-soft); }
+.thread .list-text strong { font-weight: 600; }
+.thread .unread { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.threads .empty { padding: 32px 12px; border: 0; }
+
+.conversation { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.conversation > .empty { border: 0; margin: auto; }
+.conv-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+}
+.conv-head > div { min-width: 0; }
+.conv-head strong { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conv-head > div > span { display: block; color: var(--text-2); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conv-head .link { margin-left: auto; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
+.conv-head .back { display: none; }
+
+.bubbles { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
+.bubble {
+  max-width: 72%;
+  padding: 9px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.bubble.them { align-self: flex-start; background: var(--fill); border-bottom-left-radius: 6px; }
+.bubble.me { align-self: flex-end; background: var(--accent); color: #fff; border-bottom-right-radius: 6px; }
+.bubble-time { font-size: 11px; color: var(--text-3); margin: 4px 6px 8px; }
+.bubble-time.me { align-self: flex-end; }
+
+.composer {
+  display: flex; gap: 10px; align-items: flex-end;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+}
+.composer textarea {
+  flex: 1;
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--fill);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  padding: 10px 16px;
+  resize: none;
+  max-height: 120px;
+  outline: none;
+  line-height: 1.35;
+}
+.composer textarea:focus { border-color: var(--accent); background: var(--surface); }
+.composer .send {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.16s, opacity 0.16s;
+}
+.composer .send:active { transform: scale(0.92); }
+.composer .send:disabled { opacity: 0.4; }
+.composer .send svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* =====================================================
+   PROFILE / PORTFOLIO
+   ===================================================== */
+
+.profile-top { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+.profile-top h2 { font-size: 24px; margin-bottom: 2px; }
+
+.skill-add { display: flex; gap: 10px; align-items: flex-start; }
+.skill-add .grow { flex: 1; }
+.skill-add .btn { height: 50px; border-radius: var(--radius-sm); }
+
+.danger-zone { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.danger-zone h3 { margin-bottom: 4px; }
+.danger-zone p { font-size: 14px; }
+
+.card .link-out { font-size: 14px; font-weight: 500; }
+
+/* Public profile in sheet */
+.pp-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.pp-head h3 { margin: 0 0 2px; font-size: 22px; }
+.pp-section { margin-top: 20px; }
+.pp-section h4 { font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 10px; }
+.pp-project { padding: 12px 0; border-top: 1px solid var(--line); }
+.pp-project strong { display: block; margin-bottom: 2px; }
+.pp-project p { color: var(--text-2); font-size: 14px; }
+.applicant { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.applicant:first-child { border-top: 0; }
+.applicant .list-text strong { font-weight: 600; }
+.applicant .note { color: var(--text-2); font-size: 14px; margin-top: 4px; white-space: normal; }
+.applicant .card-actions { margin-left: auto; }
+
+/* =====================================================
+   SHEET (modal)
+   ===================================================== */
+
+.sheet { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.sheet-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeIn 0.2s; }
+.sheet-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100dvh - 40px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  animation: sheetIn 0.28s var(--ease);
+}
+.sheet-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px 0; }
+.sheet-head h2 { font-size: 22px; }
+.sheet-body { padding: 20px 24px 24px; overflow-y: auto; }
+.sheet-body .form-actions { margin-top: 12px; }
+.sheet-body p.lead { color: var(--text-2); margin-bottom: 18px; }
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes sheetIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } }
+
+/* =====================================================
+   TOASTS
+   ===================================================== */
+
+.toasts {
+  position: fixed;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex; flex-direction: column; gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  border-radius: 980px;
+  background: var(--glass);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+  font-size: 14px;
+  font-weight: 500;
+  animation: toastIn 0.3s var(--ease);
+}
+.toast.out { animation: toastOut 0.25s var(--ease) forwards; }
+.toast svg { width: 18px; height: 18px; fill: var(--success); }
+.toast.error svg { fill: var(--danger); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(-16px) scale(0.96); } }
+@keyframes toastOut { to { opacity: 0; transform: translateY(-10px) scale(0.96); } }
+
+/* =====================================================
+   TAB BAR (mobile)
+   ===================================================== */
+
+.tabbar { display: none; }
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1024px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth-visual { display: none; }
+  .auth-brand { display: block; }
+  .main { padding: 40px 28px 110px; }
+}
+
+@media (max-width: 820px) {
+  .sidebar { display: none; }
+  .main { padding: 28px 18px 110px; }
+  h1 { font-size: 32px; }
+  .page-head { margin-bottom: 22px; }
+  .hero { padding: 30px 26px; min-height: 0; border-radius: 20px; }
+  .hero h2 { font-size: 30px; }
+  .hero p { font-size: 16px; }
+  .stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat { padding: 16px; }
+  .stat strong { font-size: 28px; }
+  .stat span { font-size: 12px; }
+  .two-col, .cards, .grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .chat { grid-template-columns: minmax(0, 1fr); height: calc(100dvh - 330px); min-height: 380px; }
+  .threads { border-right: 0; }
+  .chat.show-conv .threads { display: none; }
+  .chat:not(.show-conv) .conversation { display: none; }
+  .conv-head .back { display: inline-flex; }
+  .danger-zone { flex-direction: column; align-items: flex-start; }
+
+  .tabbar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    background: var(--glass);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-top: 1px solid var(--line);
+  }
+  .tab {
+    position: relative;
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 6px 2px;
+    color: var(--text-3);
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 10px;
+  }
+  .tab svg { width: 24px; height: 24px; fill: currentColor; }
+  .tab.active { color: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Account panel ---------- */
+
+.account-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.account-row:first-of-type { border-top: 0; padding-top: 0; }
+.account-row strong { display: block; font-weight: 500; }
+.account-row span { display: block; }
+.account-panel h3 { margin-bottom: 8px; }
+.delete-link { text-align: center; margin-top: 28px; }
+.link.danger { color: var(--danger); font-size: 14px; font-weight: 400; }
+
+/* ---------- Status tags ---------- */
+.tag.progress { background: rgba(255, 159, 10, 0.16); color: #b26a00; }
+.tag.hired { background: rgba(52, 199, 89, 0.15); color: #1f8a3a; }
+.tag.declined { background: var(--danger-soft); color: var(--danger); }
+[data-theme="dark"] .tag.progress { color: #ff9f0a; }
+[data-theme="dark"] .tag.hired { color: var(--success); }
+.bubble.system { align-self: center; background: transparent; color: var(--text-3); font-size: 12px; text-align: center; max-width: 90%; padding: 4px 8px; }
+
+@media (max-width: 820px) {
+  .account-row { align-items: flex-start; }
+}
+
+/* =====================================================
+   AURORA (shared animated gradient)
+   ===================================================== */
+
+.aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.aurora i {
+  position: absolute;
+  width: 46vmax; height: 46vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.42;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.aurora i:nth-child(1) { background: #0a84ff; top: -25%; left: -15%; }
+.aurora i:nth-child(2) { background: #bf5af2; bottom: -30%; right: -10%; animation-duration: 22s; animation-delay: -6s; }
+.aurora i:nth-child(3) { background: #ff375f; top: 30%; right: 10%; width: 30vmax; height: 30vmax; opacity: 0.3; animation-duration: 26s; animation-delay: -12s; }
+.aurora i:nth-child(4) { background: #64d2ff; bottom: -10%; left: 35%; width: 34vmax; height: 34vmax; opacity: 0.3; animation-duration: 20s; animation-delay: -3s; }
+.aurora.small i { width: 70%; height: 140%; filter: blur(60px); opacity: 0.7; }
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(12%, 10%) scale(1.15); }
+}
+
+.grad {
+  background: linear-gradient(90deg, #64d2ff 0%, #bf5af2 50%, #ff375f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: 0.1s; }
+.reveal.d2 { transition-delay: 0.2s; }
+.reveal.d3 { transition-delay: 0.3s; }
+.reveal.d4 { transition-delay: 0.45s; }
+
+/* ---------- Glass buttons ---------- */
+.btn-glass { background: rgba(255, 255, 255, 0.14); color: #fff; border: 1px solid rgba(255, 255, 255, 0.25); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.btn-glass:hover { background: rgba(255, 255, 255, 0.24); }
+.btn-white { background: #fff; color: #1d1d1f; }
+.btn-white:hover { background: #f5f5f7; }
+
+/* =====================================================
+   LANDING
+   ===================================================== */
+
+.landing { min-height: 100dvh; background: #000; color: #f5f5f7; }
+.landing .brand { color: #fff; margin: 0; padding: 0; }
+
+.landing-nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100dvh - 60px);
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: center;
+  gap: 48px;
+  padding: 80px max(28px, calc((100% - 1160px) / 2));
+  background: radial-gradient(1200px 800px at 50% 110%, #1a1a2e 0%, #000 60%);
+}
+.hero-inner { position: relative; z-index: 1; }
+.eyebrow-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 980px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 13px;
+  font-weight: 500;
+  color: #d0d0d5;
+  margin-bottom: 24px;
+}
+.landing-hero h1 { font-size: clamp(42px, 4.2vw, 58px); letter-spacing: -0.04em; line-height: 1; color: #fff; margin-bottom: 24px; }
+.lede { font-size: clamp(17px, 1.5vw, 21px); color: #a1a1a6; line-height: 1.45; max-width: 520px; margin-bottom: 34px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* floating preview */
+.preview { position: relative; z-index: 1; height: 440px; perspective: 1400px; }
+.glass-card {
+  position: absolute;
+  background: rgba(22, 22, 28, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #fff;
+  animation: float 7s ease-in-out infinite;
+}
+.job-preview { top: 30px; left: 0; width: min(360px, 90%); padding: 22px; transform: rotateY(-8deg) rotateX(4deg); }
+.gp-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.gp-head strong { font-size: 17px; letter-spacing: -0.01em; }
+.gp-head span { font-weight: 600; white-space: nowrap; }
+.job-preview p { color: #d6d6db; font-size: 14px; line-height: 1.45; margin-bottom: 14px; }
+.gp-chips { display: flex; gap: 6px; margin-bottom: 16px; }
+.gp-chips span { padding: 5px 11px; border-radius: 980px; font-size: 12px; font-weight: 500; background: rgba(41, 151, 255, 0.25); color: #9cd0ff; }
+.gp-foot { font-size: 13px; color: #b8b8be; display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.gp-foot .dot { width: 8px; height: 8px; border-radius: 50%; background: #30d158; box-shadow: 0 0 12px #30d158; }
+
+.msg-preview { right: 0; top: 230px; width: min(330px, 85%); padding: 16px; display: flex; flex-direction: column; gap: 8px; animation-delay: -2.5s; transform: rotateY(6deg); }
+.mp-bubble { max-width: 90%; padding: 9px 13px; border-radius: 16px; font-size: 14px; line-height: 1.35; }
+.mp-bubble.them { align-self: flex-start; background: rgba(255, 255, 255, 0.18); border-bottom-left-radius: 5px; }
+.mp-bubble.me { align-self: flex-end; background: #0a84ff; border-bottom-right-radius: 5px; }
+
+.hired-preview { right: 40px; top: 120px; padding: 12px 16px 12px 12px; display: flex; align-items: center; gap: 12px; border-radius: 16px; animation-delay: -4s; }
+.hired-preview .check { width: 34px; height: 34px; border-radius: 50%; background: #30d158; color: #000; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(48, 209, 88, 0.6); }
+.hired-preview strong { display: block; font-size: 14px; }
+.hired-preview span:last-child { font-size: 12px; color: #b8b8be; }
+
+@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+
+/* sections */
+.landing-section { max-width: 1160px; margin: 0 auto; padding: 96px 28px 0; }
+.section-head { max-width: 640px; margin-bottom: 40px; }
+.section-head h2 { font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.03em; color: #fff; margin-bottom: 12px; }
+.section-head p { font-size: 19px; color: #a1a1a6; line-height: 1.45; }
+
+.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.path {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  text-align: left;
+  padding: 34px;
+  border-radius: 26px;
+  background: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f5f5f7;
+  transition: transform 0.35s var(--ease), border-color 0.35s, box-shadow 0.35s;
+}
+.path::after { content: ""; position: absolute; inset: 0; background: radial-gradient(600px 300px at 0% 0%, rgba(10, 132, 255, 0.25), transparent 60%); opacity: 0; transition: opacity 0.35s; }
+.path[data-role="Client"]::after { background: radial-gradient(600px 300px at 0% 0%, rgba(191, 90, 242, 0.28), transparent 60%); }
+.path:hover { transform: translateY(-6px); border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }
+.path:hover::after { opacity: 1; }
+.path > * { position: relative; }
+.path-icon { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, #0a84ff, #64d2ff); color: #fff; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; box-shadow: 0 10px 30px rgba(10, 132, 255, 0.4); }
+.path-icon.violet { background: linear-gradient(135deg, #bf5af2, #ff375f); box-shadow: 0 10px 30px rgba(191, 90, 242, 0.4); }
+.path-icon svg { width: 26px; height: 26px; fill: currentColor; }
+.path strong { font-size: 26px; font-weight: 600; letter-spacing: -0.025em; color: #fff; }
+.path > span:not(.path-icon) { color: #a1a1a6; font-size: 16px; line-height: 1.5; }
+.path em { font-style: normal; color: #2997ff; font-weight: 500; margin-top: 10px; font-size: 15px; }
+
+.bento { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.bento li {
+  padding: 34px;
+  border-radius: 26px;
+  background: #1c1c1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 220px;
+  display: flex; flex-direction: column;
+  transition: transform 0.35s var(--ease), border-color 0.35s;
+}
+.bento li:hover { transform: translateY(-4px); border-color: rgba(255, 255, 255, 0.18); }
+.bento .num { font-size: 52px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: auto; background: linear-gradient(135deg, #64d2ff, #bf5af2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bento li:nth-child(2) .num { background-image: linear-gradient(135deg, #bf5af2, #ff375f); }
+.bento li:nth-child(3) .num { background-image: linear-gradient(135deg, #30d158, #64d2ff); }
+.bento li:nth-child(4) .num { background-image: linear-gradient(135deg, #ff9f0a, #ff375f); }
+.bento strong { display: block; font-size: 22px; letter-spacing: -0.02em; color: #fff; margin: 28px 0 8px; }
+.bento li > span:last-child { color: #a1a1a6; font-size: 15px; line-height: 1.5; }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.feature { padding-top: 32px; }
+.feature strong { display: block; font-size: 19px; letter-spacing: -0.015em; color: #fff; margin-bottom: 8px; }
+.feature span { color: #a1a1a6; font-size: 15px; line-height: 1.5; }
+
+.cta-band {
+  position: relative; overflow: hidden;
+  max-width: 1160px; margin: 96px auto 0;
+  padding: 90px 28px;
+  border-radius: 32px;
+  text-align: center;
+  background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 55%, #bf5af2 100%);
+}
+.cta-band > * { position: relative; }
+.cta-band h2 { font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.04em; color: #fff; margin-bottom: 12px; }
+.cta-band p { color: rgba(255, 255, 255, 0.85); font-size: 19px; margin-bottom: 30px; }
+.cta-band .hero-cta { justify-content: center; }
+
+.landing-foot { max-width: 1160px; margin: 0 auto; padding: 40px 28px 48px; display: flex; justify-content: space-between; gap: 16px; color: #6e6e73; font-size: 13px; }
+
+@media (max-width: 1024px) {
+  .landing-hero { grid-template-columns: 1fr; min-height: 0; padding-top: 64px; padding-bottom: 64px; }
+  .preview { height: 420px; max-width: 520px; }
+}
+@media (max-width: 820px) {
+  .landing-nav { padding: 12px 18px; }
+  .landing-hero { padding: 48px 18px 40px; gap: 24px; }
+  .landing-hero h1 br { display: none; }
+  .lede { margin-bottom: 26px; }
+  .preview { height: 380px; }
+  .job-preview { width: 82%; padding: 18px; }
+  .msg-preview { width: 78%; top: 200px; }
+  .hired-preview { display: none; }
+  .msg-preview { top: 190px; }
+  .landing-section { padding: 64px 18px 0; }
+  .paths, .bento, .features { grid-template-columns: 1fr; gap: 14px; }
+  .path, .bento li { padding: 26px; min-height: 0; }
+  .bento .num { font-size: 40px; }
+  .bento strong { margin-top: 18px; }
+  .features { gap: 8px; }
+  .cta-band { margin: 64px 18px 0; padding: 60px 22px; border-radius: 26px; }
+  .landing-foot { flex-direction: column; gap: 6px; padding: 32px 18px 40px; }
+}
+
+/* ---------- Auth visual upgrade ---------- */
+.auth-visual { background: #000; }
+.auth-visual .aurora i { opacity: 0.6; }
+.auth-mark, .auth-claim { position: relative; }
+.auth-mark { background: linear-gradient(135deg, #fff 30%, #9cd0ff); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; }
+
+/* ---------- App polish ---------- */
+.hero { background: #0a1a3a; }
+.hero .aurora i { opacity: 0.8; }
+.hero-copy { position: relative; z-index: 1; }
+.welcome-name { background: linear-gradient(90deg, #0a84ff, #bf5af2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+[data-theme="dark"] .welcome-name { background-image: linear-gradient(90deg, #64d2ff, #bf5af2); }
+.card, .stat, .panel { transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s; }
+.card:hover, .stat:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08); }
+[data-theme="dark"] .card:hover, [data-theme="dark"] .stat:hover { box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5); }
+.sheet-card { background: var(--glass); backdrop-filter: saturate(180%) blur(30px); -webkit-backdrop-filter: saturate(180%) blur(30px); border: 1px solid var(--line); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ============ LANDING ============ -->
+<div id="landing" class="landing">
+  <header class="landing-nav">
+    <div class="brand">GW.</div>
+    <button class="btn btn-glass btn-sm" id="landingSignIn">Sign in</button>
+  </header>
+
+  <section class="landing-hero">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="hero-inner">
+      <p class="eyebrow-pill reveal">Freelance marketplace</p>
+      <h1 class="reveal d1">Where independent talent <br><span class="grad">meets serious work.</span></h1>
+      <p class="lede reveal d2">Post a job or send a proposal. Talk directly. Hire in a tap. No middleman, no fees, no noise.</p>
+      <div class="hero-cta reveal d3">
+        <button class="btn btn-white" id="pathFreelancer">Find work</button>
+        <button class="btn btn-glass" id="pathClient">Hire talent</button>
+      </div>
+    </div>
+
+    <div class="preview reveal d4" aria-hidden="true">
+      <div class="glass-card job-preview">
+        <div class="gp-head"><strong>Redesign our booking site</strong><span>$1,500 – $3,000</span></div>
+        <p>Mobile-friendly booking flow with calendar and Stripe payments.</p>
+        <div class="gp-chips"><span>HTML</span><span>CSS</span><span>Stripe</span></div>
+        <div class="gp-foot"><span class="dot"></span> 3 proposals · Open</div>
+      </div>
+      <div class="glass-card msg-preview">
+        <div class="mp-bubble them">I've built two booking sites with Stripe — happy to share them.</div>
+        <div class="mp-bubble me">Great. You're hired — let's start Monday.</div>
+      </div>
+      <div class="glass-card hired-preview"><span class="check">✓</span><div><strong>Misbah hired</strong><span>Job moved to In progress</span></div></div>
+    </div>
+  </section>
+
+  <section class="landing-section">
+    <div class="section-head reveal">
+      <h2>Two sides. One place.</h2>
+      <p>Whether you're looking for your next project or the person to build it, GW Work starts with the right account.</p>
+    </div>
+    <div class="paths">
+      <button class="path reveal" data-role="Freelancer">
+        <span class="path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0z"/></svg></span>
+        <strong>I'm looking for work</strong>
+        <span>Browse open jobs, send proposals with a note, and let your portfolio speak for you.</span>
+        <em>Create a freelancer account →</em>
+      </button>
+      <button class="path reveal d1" data-role="Client">
+        <span class="path-icon violet" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v2h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V5a1 1 0 0 1 1-1zm1 3h4V6h-4z"/></svg></span>
+        <strong>I'm hiring</strong>
+        <span>Post a project, review proposals side by side, and hire the freelancer who fits.</span>
+        <em>Create a client account →</em>
+      </button>
+    </div>
+  </section>
+
+  <section class="landing-section">
+    <div class="section-head reveal">
+      <h2>How it works</h2>
+      <p>Four steps from idea to done.</p>
+    </div>
+    <ol class="bento">
+      <li class="reveal"><span class="num">01</span><strong>A client posts a job</strong><span>Title, description, budget and the skills it needs. Live in seconds.</span></li>
+      <li class="reveal d1"><span class="num">02</span><strong>Freelancers send proposals</strong><span>A short note plus their profile and portfolio — everything a client needs to decide.</span></li>
+      <li class="reveal d2"><span class="num">03</span><strong>The client hires</strong><span>One tap moves the job to In progress. Everyone who applied is told automatically.</span></li>
+      <li class="reveal d3"><span class="num">04</span><strong>Work happens in Messages</strong><span>Direct conversation, threaded by person, until the job is marked complete.</span></li>
+    </ol>
+  </section>
+
+  <section class="landing-section">
+    <div class="features">
+      <div class="feature reveal"><strong>Proposals with context</strong><span>See skills, portfolio and a personal note — not just a name.</span></div>
+      <div class="feature reveal d1"><strong>Status you can trust</strong><span>Open, In progress, Completed. Both sides always see the same thing.</span></div>
+      <div class="feature reveal d2"><strong>Made for the phone</strong><span>Tab bar, threaded messages, dark mode. It feels like an app because it's built like one.</span></div>
+    </div>
+  </section>
+
+  <section class="cta-band reveal">
+    <div class="aurora small" aria-hidden="true"><i></i><i></i><i></i></div>
+    <h2>Start today.</h2>
+    <p>Free to join. Your data stays in your browser.</p>
+    <div class="hero-cta">
+      <button class="btn btn-white" data-role="Freelancer">Find work</button>
+      <button class="btn btn-glass" data-role="Client">Hire talent</button>
+    </div>
+  </section>
+
+  <footer class="landing-foot">
+    <span>GW Work</span>
+    <span>Everything is stored in this browser. Nothing is sent to a server.</span>
+  </footer>
+</div>
+
+
+<!-- ============ AUTH ============ -->
+<div id="authPage" class="auth hidden">
+  <div class="auth-visual" aria-hidden="true">
+    <div class="aurora" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="auth-mark">GW.</div>
+    <p class="auth-claim">Work that finds you.<br>Talent that finds work.</p>
+  </div>
+
+  <div class="auth-panel">
+    <div class="auth-card">
+      <button type="button" class="link back-link" id="backToLanding">‹ Back</button>
+
+      <!-- Sign in -->
+      <form id="loginBox" class="auth-form" novalidate>
+        <div class="auth-brand">GW.</div>
+        <h1>Sign in to GW Work</h1>
+        <p class="sub">One sign-in for freelancers and clients — your account remembers which you are.</p>
+
+        <div class="field">
+          <input id="loginEmail" type="email" autocomplete="username" placeholder=" " required>
+          <label for="loginEmail">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder=" " required>
+          <label for="loginPassword">Password</label>
+          <button type="button" class="reveal-pw" data-reveal="loginPassword" aria-label="Show password">Show</button>
+        </div>
+
+        <p id="loginError" class="form-error" role="alert"></p>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+
+        <p class="switch">New to GW Work? <button type="button" class="link" id="goRegister">Create an account</button></p>
+      </form>
+
+      <!-- Create account -->
+      <form id="registerBox" class="auth-form hidden" novalidate>
+        <div class="auth-brand">GW.</div>
+        <h1 id="registerTitle">Create your account</h1>
+        <p class="sub" id="registerSub">Choose how you'll use GW Work. This can't be changed later.</p>
+
+        <div class="segmented" role="radiogroup" aria-label="Account type">
+          <input type="radio" name="registerRole" id="roleFreelancer" value="Freelancer" checked>
+          <label for="roleFreelancer">Freelancer</label>
+          <input type="radio" name="registerRole" id="roleClient" value="Client">
+          <label for="roleClient">Client (hiring)</label>
+          <span class="segmented-thumb" aria-hidden="true"></span>
+        </div>
+        <p class="role-hint" id="roleHint">Freelancers browse jobs, send proposals and build a portfolio.</p>
+
+        <div class="field">
+          <input id="registerName" type="text" autocomplete="name" placeholder=" " required>
+          <label for="registerName">Full name</label>
+        </div>
+
+        <div class="field">
+          <input id="registerEmail" type="email" autocomplete="email" placeholder=" " required>
+          <label for="registerEmail">Email</label>
+        </div>
+
+        <div class="field">
+          <input id="registerPassword" type="password" autocomplete="new-password" placeholder=" " minlength="8" required>
+          <label for="registerPassword">Password (8+ characters)</label>
+          <button type="button" class="reveal-pw" data-reveal="registerPassword" aria-label="Show password">Show</button>
+        </div>
+
+        <p id="registerError" class="form-error" role="alert"></p>
+
+        <button type="submit" class="btn btn-primary btn-block">Create account</button>
+
+        <p class="switch">Already have an account? <button type="button" class="link" id="goLogin">Sign in</button></p>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ============ APP ============ -->
+<div id="app" class="app hidden">
+
+  <aside class="sidebar">
+    <div class="brand">GW.</div>
+
+    <button class="user-mini" id="userMini" type="button" data-page="profile" aria-label="Open profile">
+      <span id="sideAvatar" class="avatar">M</span>
+      <span class="user-text">
+        <strong id="sideName">Misbah</strong>
+        <small id="sideRole">Freelancer</small>
+      </span>
+    </button>
+
+    <nav aria-label="Main">
+      <button class="nav-btn active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-btn" data-page="jobs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6a1 1 0 0 1 1 1v2h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V5a1 1 0 0 1 1-1zm1 3h4V6h-4z"/></svg>
+        <span id="jobsNavText">Find jobs</span>
+      </button>
+      <button class="nav-btn client-only" data-page="postjob">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5a1 1 0 0 1 1-1z"/></svg>
+        <span>Post a job</span>
+      </button>
+      <button class="nav-btn" data-page="messages">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 3.5V17H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>
+        <span>Messages</span>
+        <b id="messageBadge" class="badge hidden">0</b>
+      </button>
+      <button class="nav-btn freelancer-only" data-page="portfolio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7v7H4zm9 0h7v7h-7zM4 14h7v7H4zm9 0h7v7h-7z"/></svg>
+        <span>Portfolio</span>
+      </button>
+      <button class="nav-btn" data-page="profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0z"/></svg>
+        <span>Profile</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="nav-btn" id="themeToggle" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+        <span id="themeLabel">Dark mode</span>
+      </button>
+      <button class="nav-btn" id="logoutBtn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-2H6V6h4zm5 4-1.4 1.4 1.6 1.6H9v2h6.2l-1.6 1.6L15 16l4-4z"/></svg>
+        <span>Sign out</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active">
+      <header class="page-head">
+        <h1 id="welcomeText">Good morning, Misbah</h1>
+        <p class="sub" id="welcomeSub">Here's what's happening today.</p>
+      </header>
+
+      <div class="hero">
+        <div class="aurora small" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="hero-copy">
+          <h2 id="heroTitle">Build your freelance career.</h2>
+          <p id="heroText">Find projects, send proposals and show clients what you can do.</p>
+          <button class="btn btn-primary" id="heroAction" data-page="jobs">Browse jobs</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <button class="stat" data-page="jobs">
+          <strong id="statOne">0</strong>
+          <span id="statOneLabel">Open jobs</span>
+        </button>
+        <button class="stat" data-page="jobs">
+          <strong id="statTwo">0</strong>
+          <span id="statTwoLabel">Proposals sent</span>
+        </button>
+        <button class="stat" data-page="messages">
+          <strong id="statThree">0</strong>
+          <span id="statThreeLabel">Unread messages</span>
+        </button>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head">
+            <h3 id="recentTitle">Recent jobs</h3>
+            <button class="link" data-page="jobs">See all</button>
+          </div>
+          <div id="recentJobs" class="list"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Recent messages</h3>
+            <button class="link" data-page="messages">See all</button>
+          </div>
+          <div id="recentMessages" class="list"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- JOBS -->
+    <section id="jobs" class="page">
+      <header class="page-head">
+        <h1 id="jobsHeading">Find jobs</h1>
+        <p class="sub" id="jobsSub">Open projects from clients on GW Work.</p>
+      </header>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 1 1 4.2 12.6l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 0 1 10 3zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+          <input id="jobSearch" type="search" placeholder="Search by title, skill or client">
+        </div>
+        <div class="segmented small client-only" id="jobStatusFilter" role="radiogroup" aria-label="Job status">
+          <input type="radio" name="jobStatus" id="jsOpen" value="open" checked><label for="jsOpen">Open</label>
+          <input type="radio" name="jobStatus" id="jsProgress" value="in progress"><label for="jsProgress">In progress</label>
+          <input type="radio" name="jobStatus" id="jsDone" value="done"><label for="jsDone">Done</label>
+          <input type="radio" name="jobStatus" id="jsAll" value="all"><label for="jsAll">All</label>
+          <span class="segmented-thumb" aria-hidden="true"></span>
+        </div>
+        <div class="segmented small freelancer-only" id="jobViewFilter" role="radiogroup" aria-label="View">
+          <input type="radio" name="jobView" id="jvBrowse" value="browse" checked><label for="jvBrowse">Browse</label>
+          <input type="radio" name="jobView" id="jvMine" value="mine"><label for="jvMine">My proposals</label>
+          <span class="segmented-thumb" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div id="jobsList" class="cards"></div>
+    </section>
+
+
+    <!-- POST JOB -->
+    <section id="postjob" class="page">
+      <header class="page-head">
+        <h1>Post a job</h1>
+        <p class="sub">Describe the project and freelancers will send proposals.</p>
+      </header>
+
+      <form class="panel form" id="postJobForm" novalidate>
+        <div class="field">
+          <input id="jobTitle" placeholder=" " maxlength="80">
+          <label for="jobTitle">Job title</label>
+        </div>
+        <div class="field">
+          <textarea id="jobDescription" placeholder=" " rows="5"></textarea>
+          <label for="jobDescription">What needs to be done</label>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <input id="jobBudget" placeholder=" ">
+            <label for="jobBudget">Budget, e.g. $200 – $500</label>
+          </div>
+          <div class="field">
+            <input id="jobSkills" placeholder=" ">
+            <label for="jobSkills">Skills, comma separated</label>
+          </div>
+        </div>
+        <p id="jobError" class="form-error" role="alert"></p>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Publish job</button>
+        </div>
+      </form>
+    </section>
+
+
+    <!-- MESSAGES -->
+    <section id="messages" class="page">
+      <header class="page-head">
+        <h1>Messages</h1>
+        <p class="sub">Conversations with clients and freelancers.</p>
+      </header>
+
+      <div class="chat" id="chat">
+        <div class="threads" id="threadList"></div>
+        <div class="conversation" id="conversation">
+          <div class="empty">
+            <strong>Select a conversation</strong>
+            <span>Messages start when a freelancer applies to a job.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PROFILE -->
+    <section id="profile" class="page">
+      <header class="page-head">
+        <h1>Profile</h1>
+        <p class="sub" id="profileSub">This is what others see when they look you up.</p>
+      </header>
+
+      <div class="panel">
+        <div class="profile-top">
+          <div id="profileAvatar" class="avatar avatar-lg">M</div>
+          <div>
+            <h2 id="profileName">Misbah</h2>
+            <p class="muted" id="profileRole">Freelancer</p>
+            <p class="muted small" id="profileEmail"></p>
+          </div>
+        </div>
+
+        <form id="freelancerProfile" class="form" novalidate>
+          <div class="field">
+            <input id="profileTitle" placeholder=" " maxlength="60">
+            <label for="profileTitle">Professional title, e.g. Web developer</label>
+          </div>
+          <div class="field">
+            <textarea id="profileBio" placeholder=" " rows="4" maxlength="600"></textarea>
+            <label for="profileBio">About you</label>
+          </div>
+
+          <div class="skill-add">
+            <div class="field grow">
+              <input id="skillInput" placeholder=" " maxlength="30">
+              <label for="skillInput">Add a skill and press Enter</label>
+            </div>
+            <button type="button" class="btn btn-secondary" id="addSkillBtn">Add</button>
+          </div>
+          <div id="skillsList" class="chips"></div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+
+        <form id="clientProfile" class="form hidden" novalidate>
+          <div class="field">
+            <input id="clientCompany" placeholder=" " maxlength="60">
+            <label for="clientCompany">Company or team name</label>
+          </div>
+          <div class="field">
+            <textarea id="clientBio" placeholder=" " rows="4" maxlength="600"></textarea>
+            <label for="clientBio">About what you're building</label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel account-panel">
+        <h3>Account</h3>
+        <div class="account-row">
+          <div><strong>Appearance</strong><span class="muted small" id="themeHint">Follows your device setting</span></div>
+          <button class="btn btn-secondary btn-sm" id="themeToggleProfile" type="button">Dark mode</button>
+        </div>
+        <div class="account-row">
+          <div><strong>Signed in as</strong><span class="muted small" id="accountEmail"></span></div>
+          <button class="btn btn-secondary btn-sm" id="logoutBtnProfile" type="button">Sign out</button>
+        </div>
+      </div>
+
+      <p class="delete-link"><button class="link danger" id="deleteAccountBtn" type="button">Delete account…</button></p>
+    </section>
+
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="page">
+      <header class="page-head">
+        <h1>Portfolio</h1>
+        <p class="sub">Projects clients see when you apply.</p>
+      </header>
+
+      <div id="portfolioList" class="cards"></div>
+
+      <form class="panel form" id="portfolioForm" novalidate>
+        <h3>Add a project</h3>
+        <div class="field">
+          <input id="portfolioTitle" placeholder=" " maxlength="80">
+          <label for="portfolioTitle">Project title</label>
+        </div>
+        <div class="field">
+          <textarea id="portfolioDescription" placeholder=" " rows="3" maxlength="500"></textarea>
+          <label for="portfolioDescription">What you did</label>
+        </div>
+        <div class="field">
+          <input id="portfolioLink" type="url" placeholder=" ">
+          <label for="portfolioLink">Link (optional, https://…)</label>
+        </div>
+        <p id="portfolioError" class="form-error" role="alert"></p>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add project</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Mobile tab bar -->
+  <nav class="tabbar" aria-label="Main">
+    <button class="tab active" data-page="dashboard"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V19a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></button>
+    <button class="tab" data-page="jobs"><svg viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v2h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V5a1 1 0 0 1 1-1zm1 3h4V6h-4z"/></svg><span>Jobs</span></button>
+    <button class="tab client-only" data-page="postjob"><svg viewBox="0 0 24 24"><path d="M12 4a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5a1 1 0 0 1 1-1z"/></svg><span>Post</span></button>
+    <button class="tab" data-page="messages"><svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 3.5V17H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span>Messages</span><b class="badge badge-dot hidden" id="tabBadge"></b></button>
+    <button class="tab freelancer-only" data-page="portfolio"><svg viewBox="0 0 24 24"><path d="M4 5h7v7H4zm9 0h7v7h-7zM4 14h7v7H4zm9 0h7v7h-7z"/></svg><span>Portfolio</span></button>
+    <button class="tab" data-page="profile"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 8a7 7 0 0 1 14 0z"/></svg><span>Profile</span></button>
+  </nav>
+</div>
+
+
+<!-- Sheet (modal) -->
+<div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-backdrop" data-close></div>
+  <div class="sheet-card">
+    <div class="sheet-head">
+      <h2 id="sheetTitle"></h2>
+      <button class="icon-btn" data-close aria-label="Close">
+        <svg viewBox="0 0 24 24"><path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4L12 13.4 6.4 19 5 17.6l5.6-5.6L5 6.4z"/></svg>
+      </button>
+    </div>
+    <div id="sheetBody" class="sheet-body"></div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script>
+/* =====================================================
+   GW Work — app logic
+   Everything is stored in this browser (localStorage).
+   ===================================================== */
+
+const $ = (id) => document.getElementById(id);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+/* ---------- State ---------- */
+
+const store = {
+  users: load("gw_users", []),
+  jobs: load("gw_jobs", []),
+  messages: load("gw_messages", []),
+  portfolios: load("gw_portfolios", []),
+};
+
+let currentUser = null;
+let currentSkills = [];
+let activeThreadId = null;
+let currentPage = "dashboard";
+
+function load(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveData() {
+  localStorage.setItem("gw_users", JSON.stringify(store.users));
+  localStorage.setItem("gw_jobs", JSON.stringify(store.jobs));
+  localStorage.setItem("gw_messages", JSON.stringify(store.messages));
+  localStorage.setItem("gw_portfolios", JSON.stringify(store.portfolios));
+}
+
+/* Upgrade data written by the previous version of the app. */
+function migrate() {
+  store.jobs.forEach((job) => {
+    if (!job.status) job.status = "open";
+    if (!Array.isArray(job.applicants)) job.applicants = [];
+    job.applicants = job.applicants.map((a) =>
+      typeof a === "object"
+        ? a
+        : { userId: a, name: (store.users.find((u) => u.id === a) || {}).name || "Freelancer", note: "", at: null }
+    );
+    job.applicants.forEach((a) => { if (!a.status) a.status = "pending"; });
+    if (job.createdAt && isNaN(Date.parse(job.createdAt))) job.createdAt = null;
+  });
+  store.messages.forEach((m) => {
+    if (typeof m.read !== "boolean") m.read = true;
+    if (m.time && isNaN(Date.parse(m.time))) m.time = null;
+  });
+  saveData();
+}
+
+/* ---------- Security helpers ---------- */
+
+async function hashPassword(password) {
+  if (!(crypto && crypto.subtle)) return "plain:" + password;
+  const bytes = new TextEncoder().encode("gw-work|" + password);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return "sha256:" + Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function verifyPassword(user, password) {
+  if (user.passwordHash) return user.passwordHash === (await hashPassword(password));
+  return user.password === password; // legacy account
+}
+
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function safeUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/.test(email);
+}
+
+/* ---------- Formatting ---------- */
+
+function initials(name) {
+  return String(name || "?").trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() || "").join("") || "?";
+}
+
+function hueFor(text) {
+  let h = 0;
+  for (const ch of String(text)) h = (h * 31 + ch.charCodeAt(0)) % 360;
+  return h;
+}
+
+function avatarHTML(name, cls = "") {
+  return `<span class="avatar ${cls}" style="--h:${hueFor(name)}">${escapeHTML(initials(name))}</span>`;
+}
+
+function timeAgo(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  const diff = (Date.now() - d.getTime()) / 1000;
+  if (diff < 60) return "Just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  if (diff < 7 * 86400) return `${Math.floor(diff / 86400)}d ago`;
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function clockTime(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return "";
+  const today = new Date().toDateString() === d.toDateString();
+  return today
+    ? d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })
+    : d.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+}
+
+/* ---------- Toasts & sheets ---------- */
+
+function toast(text, type = "ok") {
+  const el = document.createElement("div");
+  el.className = "toast" + (type === "error" ? " error" : "");
+  const icon =
+    type === "error"
+      ? '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 5h2v7h-2zm0 9h2v2h-2z"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.5 14.5-4-4L8 11l2.5 2.5L16 8l1.5 1.5z"/></svg>';
+  el.innerHTML = icon + `<span>${escapeHTML(text)}</span>`;
+  $("toasts").appendChild(el);
+  setTimeout(() => {
+    el.classList.add("out");
+    setTimeout(() => el.remove(), 260);
+  }, 2600);
+}
+
+function openSheet(title, bodyHTML) {
+  $("sheetTitle").textContent = title;
+  $("sheetBody").innerHTML = bodyHTML;
+  $("sheet").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  const first = $("sheetBody").querySelector("input, textarea, button");
+  if (first) first.focus();
+}
+
+function closeSheet() {
+  $("sheet").classList.add("hidden");
+  $("sheetBody").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+function confirmSheet(title, text, actionLabel, onConfirm, danger = true) {
+  openSheet(
+    title,
+    `<p class="lead">${escapeHTML(text)}</p>
+     <div class="form-actions">
+       <button class="btn btn-secondary" data-close>Cancel</button>
+       <button class="btn ${danger ? "btn-danger" : "btn-primary"}" id="confirmBtn">${escapeHTML(actionLabel)}</button>
+     </div>`
+  );
+  $("confirmBtn").onclick = () => {
+    closeSheet();
+    onConfirm();
+  };
+}
+
+/* ---------- Theme ---------- */
+
+function applyTheme() {
+  const saved = localStorage.getItem("gw_theme");
+  const dark = saved ? saved === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.theme = dark ? "dark" : "light";
+  const label = dark ? "Light mode" : "Dark mode";
+  if ($("themeLabel")) $("themeLabel").textContent = label;
+  if ($("themeToggleProfile")) $("themeToggleProfile").textContent = label;
+  if ($("themeHint")) $("themeHint").textContent = saved ? (dark ? "Dark" : "Light") : "Follows your device setting";
+}
+
+function toggleTheme() {
+  const dark = document.documentElement.dataset.theme === "dark";
+  localStorage.setItem("gw_theme", dark ? "light" : "dark");
+  applyTheme();
+}
+
+/* ---------- Segmented controls ---------- */
+
+function syncSegmented(group) {
+  const inputs = $$('input[type="radio"]', group);
+  const idx = Math.max(0, inputs.findIndex((i) => i.checked));
+  group.style.setProperty("--count", inputs.length);
+  group.style.setProperty("--idx", idx);
+}
+
+/* =====================================================
+   AUTH
+   ===================================================== */
+
+let revealObserver = null;
+function setupReveal() {
+  if (!("IntersectionObserver" in window)) {
+    $$(".reveal").forEach((el) => el.classList.add("in"));
+    return;
+  }
+  revealObserver = new IntersectionObserver(
+    (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); revealObserver.unobserve(e.target); } }),
+    { threshold: 0.12 }
+  );
+  $$(".reveal").forEach((el) => revealObserver.observe(el));
+}
+
+function countUp(el, target) {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || target === 0) { el.textContent = target; return; }
+  const start = performance.now(), dur = 700;
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / dur);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function showLanding() {
+  $("landing").classList.remove("hidden");
+  $$("#landing .reveal").forEach((el) => { el.classList.remove("in"); revealObserver && revealObserver.observe(el); });
+  $("authPage").classList.add("hidden");
+  $("app").classList.add("hidden");
+  window.scrollTo({ top: 0 });
+}
+
+function showAuth(mode, role) {
+  $("landing").classList.add("hidden");
+  $("authPage").classList.remove("hidden");
+  if (role) {
+    $(role === "Client" ? "roleClient" : "roleFreelancer").checked = true;
+    updateRoleCopy();
+    $$(".segmented").forEach(syncSegmented);
+  }
+  mode === "register" ? showRegister() : showLogin();
+}
+
+function updateRoleCopy() {
+  const client = $("roleClient").checked;
+  $("registerTitle").textContent = client ? "Create a client account" : "Create a freelancer account";
+  $("roleHint").textContent = client
+    ? "Clients post jobs, review proposals and hire freelancers."
+    : "Freelancers browse jobs, send proposals and build a portfolio.";
+}
+
+function showRegister() {
+  $("loginBox").classList.add("hidden");
+  $("registerBox").classList.remove("hidden");
+  clearErrors();
+  updateRoleCopy();
+  $("registerName").focus();
+}
+
+function showLogin() {
+  $("registerBox").classList.add("hidden");
+  $("loginBox").classList.remove("hidden");
+  clearErrors();
+  $("loginEmail").focus();
+}
+
+function clearErrors() {
+  $$(".form-error").forEach((e) => (e.textContent = ""));
+}
+
+async function createAccount(event) {
+  event.preventDefault();
+  const name = $("registerName").value.trim();
+  const email = $("registerEmail").value.trim().toLowerCase();
+  const password = $("registerPassword").value;
+  const role = document.querySelector('input[name="registerRole"]:checked').value;
+  const error = $("registerError");
+  error.textContent = "";
+
+  if (!name) return setError(error, "Enter your full name.", "registerName");
+  if (!validEmail(email)) return setError(error, "Enter a valid email address, like name@example.com.", "registerEmail");
+  if (password.length < 8) return setError(error, "Use at least 8 characters for your password.", "registerPassword");
+  if (store.users.some((u) => u.email === email)) return setError(error, "An account with this email already exists. Sign in instead.", "registerEmail");
+
+  const user = {
+    id: Date.now(),
+    name,
+    email,
+    passwordHash: await hashPassword(password),
+    role,
+    title: "",
+    bio: "",
+    company: "",
+    skills: [],
+    createdAt: new Date().toISOString(),
+  };
+  store.users.push(user);
+  saveData();
+  $("registerBox").reset();
+  signIn(user);
+  toast(`Welcome to GW Work, ${user.name.split(" ")[0]}`);
+}
+
+async function login(event) {
+  event.preventDefault();
+  const email = $("loginEmail").value.trim().toLowerCase();
+  const password = $("loginPassword").value;
+  const error = $("loginError");
+  error.textContent = "";
+
+  if (!validEmail(email)) return setError(error, "Enter a valid email address.", "loginEmail");
+  if (!password) return setError(error, "Enter your password.", "loginPassword");
+
+  const user = store.users.find((u) => u.email === email);
+  if (!user || !(await verifyPassword(user, password))) {
+    return setError(error, "That email and password don't match an account.", "loginPassword");
+  }
+
+  if (!user.passwordHash) {
+    // upgrade legacy plain-text password
+    user.passwordHash = await hashPassword(password);
+    delete user.password;
+    saveData();
+  }
+
+  $("loginBox").reset();
+  signIn(user);
+}
+
+function setError(el, text, focusId) {
+  el.textContent = text;
+  if (focusId) $(focusId).focus();
+}
+
+function signIn(user) {
+  currentUser = user;
+  localStorage.setItem("gw_session", String(user.id));
+  $("landing").classList.add("hidden");
+  $("authPage").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  setupUserInterface();
+  showPage("dashboard");
+}
+
+function logout() {
+  currentUser = null;
+  activeThreadId = null;
+  localStorage.removeItem("gw_session");
+  showLanding();
+  toast("Signed out");
+}
+
+function restoreSession() {
+  const id = Number(localStorage.getItem("gw_session"));
+  const user = store.users.find((u) => u.id === id);
+  if (user) signIn(user);
+  else showLanding();
+}
+
+function deleteAccount() {
+  openSheet(
+    "Delete your account?",
+    `<p class="lead">This permanently removes your profile, jobs, portfolio and messages from this browser. It can't be undone.</p>
+     <div class="field">
+       <input id="deleteConfirm" placeholder=" " autocomplete="off">
+       <label for="deleteConfirm">Type DELETE to confirm</label>
+     </div>
+     <div class="form-actions">
+       <button class="btn btn-secondary" data-close>Cancel</button>
+       <button class="btn btn-danger" id="confirmBtn" disabled>Delete account</button>
+     </div>`
+  );
+  $("deleteConfirm").addEventListener("input", (e) => ($("confirmBtn").disabled = e.target.value.trim() !== "DELETE"));
+  $("confirmBtn").onclick = () => {
+    closeSheet();
+    (() => {
+      const id = currentUser.id;
+      store.users = store.users.filter((u) => u.id !== id);
+      store.jobs = store.jobs.filter((j) => j.clientId !== id);
+      store.jobs.forEach((j) => (j.applicants = j.applicants.filter((a) => a.userId !== id)));
+      store.messages = store.messages.filter((m) => m.fromId !== id && m.toId !== id);
+      store.portfolios = store.portfolios.filter((p) => p.userId !== id);
+      saveData();
+      logout();
+      toast("Account deleted");
+    })();
+  };
+}
+
+/* =====================================================
+   UI SETUP & NAVIGATION
+   ===================================================== */
+
+const isClient = () => currentUser?.role === "Client";
+const isFreelancer = () => currentUser?.role === "Freelancer";
+const firstName = () => (currentUser?.name || "").split(" ")[0];
+
+function setupUserInterface() {
+  const hue = hueFor(currentUser.name);
+  ["sideAvatar", "profileAvatar"].forEach((id) => {
+    $(id).textContent = initials(currentUser.name);
+    $(id).style.setProperty("--h", hue);
+  });
+  $("sideName").textContent = currentUser.name;
+  $("sideRole").textContent = currentUser.role;
+  $("profileName").textContent = currentUser.name;
+  $("profileRole").textContent = currentUser.role;
+  $("profileEmail").textContent = currentUser.email;
+  $("accountEmail").textContent = currentUser.email;
+
+  $$(".freelancer-only").forEach((el) => el.classList.toggle("hidden", !isFreelancer()));
+  $$(".client-only").forEach((el) => el.classList.toggle("hidden", !isClient()));
+
+  if (isClient()) {
+    $("heroTitle").textContent = "Find the right freelancer.";
+    $("heroText").textContent = "Post a project, review proposals and message the people you want to work with.";
+    $("heroAction").textContent = "Post a job";
+    $("heroAction").dataset.page = "postjob";
+    $("jobsHeading").textContent = "My jobs";
+    $("jobsSub").textContent = "Jobs you've posted and the proposals they've received.";
+    $("jobsNavText").textContent = "My jobs";
+    $("statOneLabel").textContent = "Open jobs";
+    $("statTwoLabel").textContent = "Proposals received";
+    $("statThreeLabel").textContent = "In progress";
+    $("recentTitle").textContent = "Your jobs";
+    $("profileSub").textContent = "Freelancers see this when they apply to your jobs.";
+  } else {
+    $("heroTitle").textContent = "Build your freelance career.";
+    $("heroText").textContent = "Find projects, send proposals and show clients what you can do.";
+    $("heroAction").textContent = "Browse jobs";
+    $("heroAction").dataset.page = "jobs";
+    $("jobsHeading").textContent = "Find jobs";
+    $("jobsSub").textContent = "Open projects from clients on GW Work.";
+    $("jobsNavText").textContent = "Find jobs";
+    $("statOneLabel").textContent = "Open jobs";
+    $("statTwoLabel").textContent = "Proposals sent";
+    $("statThreeLabel").textContent = "Hired";
+    $("recentTitle").textContent = "New jobs";
+    $("profileSub").textContent = "Clients see this when you apply to a job.";
+  }
+
+  loadProfile();
+  updateBadge();
+}
+
+function showPage(pageName) {
+  if (!$(pageName)) pageName = "dashboard";
+  currentPage = pageName;
+  $$(".page").forEach((p) => p.classList.toggle("active", p.id === pageName));
+  $$(".nav-btn[data-page], .tab[data-page]").forEach((b) => b.classList.toggle("active", b.dataset.page === pageName));
+  window.scrollTo({ top: 0 });
+
+  if (pageName === "dashboard") renderDashboard();
+  if (pageName === "jobs") renderJobs();
+  if (pageName === "messages") renderMessages();
+  if (pageName === "portfolio") renderPortfolio();
+}
+
+/* =====================================================
+   DASHBOARD
+   ===================================================== */
+
+function greeting() {
+  const h = new Date().getHours();
+  if (h < 5) return "Good night";
+  if (h < 12) return "Good morning";
+  if (h < 18) return "Good afternoon";
+  return "Good evening";
+}
+
+function myJobs() {
+  return isClient() ? store.jobs.filter((j) => j.clientId === currentUser.id) : store.jobs.filter((j) => j.status === "open");
+}
+
+function myMessages() {
+  return store.messages.filter((m) => m.fromId === currentUser.id || m.toId === currentUser.id);
+}
+
+function unreadCount() {
+  return store.messages.filter((m) => m.toId === currentUser.id && !m.read).length;
+}
+
+function renderDashboard() {
+  $("welcomeText").innerHTML = `${greeting()}, <span class="welcome-name">${escapeHTML(firstName())}</span>`;
+  const jobs = myJobs();
+  const unread = unreadCount();
+
+  let proposals;
+  if (isClient()) {
+    proposals = jobs.reduce((n, j) => n + j.applicants.length, 0);
+  } else {
+    proposals = store.jobs.filter((j) => j.applicants.some((a) => a.userId === currentUser.id)).length;
+  }
+
+  countUp($("statOne"), isClient() ? jobs.filter((j) => j.status === "open").length : jobs.length);
+  countUp($("statTwo"), proposals);
+  countUp($("statThree"), isClient()
+    ? jobs.filter((j) => j.status === "in progress").length
+    : store.jobs.filter((j) => j.hiredId === currentUser.id).length);
+  $("welcomeSub").textContent =
+    unread > 0
+      ? `You have ${unread} unread message${unread === 1 ? "" : "s"}.`
+      : jobs.length
+      ? isClient()
+        ? `${jobs.length} job${jobs.length === 1 ? "" : "s"} posted.`
+        : `${jobs.length} open job${jobs.length === 1 ? "" : "s"} to look at.`
+      : "Here's what's happening today.";
+
+  // recent jobs
+  const recent = jobs.slice(0, 4);
+  $("recentJobs").innerHTML = recent.length
+    ? recent
+        .map(
+          (j) => `
+      <button class="list-item" data-open-job="${j.id}">
+        <div class="list-text">
+          <strong>${escapeHTML(j.title)}</strong>
+          <span>${escapeHTML(j.budget)} · ${isClient() ? `${j.applicants.length} proposal${j.applicants.length === 1 ? "" : "s"}` : escapeHTML(j.clientName)}</span>
+        </div>
+        <span class="list-meta">${timeAgo(j.createdAt)}</span>
+      </button>`
+        )
+        .join("")
+    : `<div class="empty"><strong>${isClient() ? "No jobs yet" : "No open jobs"}</strong><span>${
+        isClient() ? "Post your first job to start receiving proposals." : "New jobs from clients will show up here."
+      }</span></div>`;
+
+  // recent messages
+  const threads = buildThreads().slice(0, 4);
+  $("recentMessages").innerHTML = threads.length
+    ? threads
+        .map(
+          (t) => `
+      <button class="list-item" data-open-thread="${t.otherId}">
+        ${avatarHTML(t.otherName, "avatar-sm")}
+        <div class="list-text">
+          <strong>${escapeHTML(t.otherName)}</strong>
+          <span>${escapeHTML(t.last.text)}</span>
+        </div>
+        ${t.unread ? '<span class="unread" style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></span>' : `<span class="list-meta">${timeAgo(t.last.time)}</span>`}
+      </button>`
+        )
+        .join("")
+    : `<div class="empty"><strong>No messages yet</strong><span>${
+        isClient() ? "You'll hear from freelancers when they apply." : "Apply to a job to start a conversation."
+      }</span></div>`;
+}
+
+/* =====================================================
+   JOBS
+   ===================================================== */
+
+function postJob(event) {
+  event.preventDefault();
+  if (!isClient()) return;
+
+  const title = $("jobTitle").value.trim();
+  const description = $("jobDescription").value.trim();
+  const budget = $("jobBudget").value.trim();
+  const skillsText = $("jobSkills").value.trim();
+  const error = $("jobError");
+  error.textContent = "";
+
+  if (!title) return setError(error, "Give the job a title.", "jobTitle");
+  if (description.length < 20) return setError(error, "Describe the project in at least a sentence or two.", "jobDescription");
+  if (!budget) return setError(error, "Add a budget so freelancers know what to expect.", "jobBudget");
+  const skills = skillsText.split(",").map((s) => s.trim()).filter(Boolean);
+  if (!skills.length) return setError(error, "List at least one required skill.", "jobSkills");
+
+  store.jobs.unshift({
+    id: Date.now(),
+    clientId: currentUser.id,
+    clientName: currentUser.name,
+    title,
+    description,
+    budget,
+    skills,
+    status: "open",
+    createdAt: new Date().toISOString(),
+    applicants: [],
+  });
+  saveData();
+  $("postJobForm").reset();
+  toast("Job published");
+  showPage("jobs");
+}
+
+function visibleJobs() {
+  const q = ($("jobSearch").value || "").trim().toLowerCase();
+  let list;
+  if (isClient()) {
+    list = store.jobs.filter((j) => j.clientId === currentUser.id);
+    const status = document.querySelector('input[name="jobStatus"]:checked')?.value || "open";
+    if (status === "done") list = list.filter((j) => j.status === "done" || j.status === "closed");
+    else if (status !== "all") list = list.filter((j) => j.status === status);
+  } else {
+    const view = document.querySelector('input[name="jobView"]:checked')?.value || "browse";
+    list = view === "mine"
+      ? store.jobs.filter((j) => j.applicants.some((a) => a.userId === currentUser.id))
+      : store.jobs.filter((j) => j.status === "open");
+  }
+  if (q) {
+    list = list.filter((j) =>
+      [j.title, j.description, j.clientName, j.budget, ...(j.skills || [])].join(" ").toLowerCase().includes(q)
+    );
+  }
+  return list;
+}
+
+function renderJobs() {
+  const container = $("jobsList");
+  const list = visibleJobs();
+  const q = $("jobSearch").value.trim();
+
+  if (!list.length) {
+    container.innerHTML = q
+      ? `<div class="empty"><strong>No jobs match "${escapeHTML(q)}"</strong><span>Try a different title, skill or client name.</span></div>`
+      : isClient()
+      ? `<div class="empty"><strong>No jobs here</strong><span>Post a job and freelancers will send you proposals.</span><button class="btn btn-primary" data-page="postjob">Post a job</button></div>`
+      : document.querySelector('input[name="jobView"]:checked')?.value === "mine"
+      ? `<div class="empty"><strong>No proposals yet</strong><span>Jobs you apply to will be tracked here, with their status.</span></div>`
+      : `<div class="empty"><strong>No open jobs right now</strong><span>Check back soon — new projects show up here as clients post them.</span></div>`;
+    return;
+  }
+
+  container.innerHTML = list.map(jobCardHTML).join("");
+}
+
+const STATUS_LABEL = { open: "Open", "in progress": "In progress", done: "Completed", closed: "Closed" };
+const STATUS_CLASS = { open: "ok", "in progress": "progress", done: "", closed: "" };
+
+function statusTag(job) {
+  return `<span class="tag ${STATUS_CLASS[job.status] || ""}">${STATUS_LABEL[job.status] || job.status}</span>`;
+}
+
+function myProposal(job) {
+  return job.applicants.find((a) => a.userId === currentUser.id);
+}
+
+function proposalTag(p, job) {
+  if (!p) return "";
+  if (p.status === "accepted") return `<span class="tag hired">${job.status === "done" ? "Completed" : "Hired"}</span>`;
+  if (p.status === "declined") return '<span class="tag declined">Not selected</span>';
+  if (job.status !== "open") return '<span class="tag">Position filled</span>';
+  return '<span class="tag">Proposal sent</span>';
+}
+
+function jobCardHTML(job) {
+  const skills = job.skills.map((s) => `<span class="chip soft">${escapeHTML(s)}</span>`).join("");
+  const n = job.applicants.length;
+  const pending = job.applicants.filter((a) => a.status === "pending").length;
+
+  let foot;
+  if (isFreelancer()) {
+    const p = myProposal(job);
+    foot = `
+      <span class="meta">${escapeHTML(job.clientName)} · ${timeAgo(job.createdAt)}</span>
+      <div class="card-actions">
+        ${p
+          ? proposalTag(p, job) + (p.status === "accepted" ? `<button class="btn btn-secondary btn-sm" data-message-user="${job.clientId}">Message</button>` : "")
+          : `<button class="btn btn-primary btn-sm" data-apply="${job.id}">Apply</button>`}
+      </div>`;
+  } else {
+    let actions = "";
+    if (job.status === "open") {
+      actions = `
+        ${n ? `<button class="btn ${pending ? "btn-primary" : "btn-secondary"} btn-sm" data-applicants="${job.id}">${pending ? `Review ${pending}` : "Proposals"}</button>` : ""}
+        <button class="btn btn-secondary btn-sm" data-close-job="${job.id}">Close</button>`;
+    } else if (job.status === "in progress") {
+      actions = `
+        <button class="btn btn-secondary btn-sm" data-message-user="${job.hiredId}">Message</button>
+        <button class="btn btn-primary btn-sm" data-complete-job="${job.id}">Mark complete</button>`;
+    } else if (job.status === "closed") {
+      actions = `<button class="btn btn-secondary btn-sm" data-reopen-job="${job.id}">Reopen</button>`;
+    } else {
+      actions = n ? `<button class="btn btn-secondary btn-sm" data-applicants="${job.id}">Proposals</button>` : "";
+    }
+    foot = `
+      <span class="meta">${timeAgo(job.createdAt)} · ${job.hiredName ? `Hired ${escapeHTML(job.hiredName)}` : `${n} proposal${n === 1 ? "" : "s"}`}</span>
+      <div class="card-actions">
+        ${actions}
+        <button class="icon-btn" data-delete-job="${job.id}" aria-label="Delete job">
+          <svg viewBox="0 0 24 24"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 5h12l-1 13H7z"/></svg>
+        </button>
+      </div>`;
+  }
+
+  return `
+    <article class="card ${job.status === "closed" || job.status === "done" ? "closed" : ""}">
+      <div class="card-head">
+        <h3>${escapeHTML(job.title)}</h3>
+        <span class="budget">${escapeHTML(job.budget)}</span>
+      </div>
+      <div class="chips" style="margin-bottom:10px">${isClient() || job.status !== "open" ? statusTag(job) : ""}</div>
+      <p class="desc">${escapeHTML(job.description)}</p>
+      <div class="chips">${skills}</div>
+      <div class="card-foot">${foot}</div>
+    </article>`;
+}
+
+function openJobDetail(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job) return;
+  const applied = job.applicants.some((a) => a.userId === currentUser.id);
+  openSheet(
+    job.title,
+    `<p class="muted small" style="margin-bottom:12px">${escapeHTML(job.clientName)} · ${escapeHTML(job.budget)} · ${timeAgo(job.createdAt)}</p>
+     <p style="white-space:pre-wrap;line-height:1.55">${escapeHTML(job.description)}</p>
+     <div class="chips" style="margin-top:16px">${job.skills.map((s) => `<span class="chip soft">${escapeHTML(s)}</span>`).join("")}</div>
+     <div class="form-actions">
+       ${isFreelancer() && job.status === "open"
+         ? applied
+           ? '<span class="tag ok">Applied</span>'
+           : `<button class="btn btn-primary" data-apply="${job.id}">Apply</button>`
+         : isClient() && job.applicants.length
+         ? `<button class="btn btn-primary" data-applicants="${job.id}">View ${job.applicants.length} proposal${job.applicants.length === 1 ? "" : "s"}</button>`
+         : ""}
+     </div>`
+  );
+}
+
+function applyToJob(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job) return;
+  if (job.status !== "open") return toast("This job is no longer accepting proposals.", "error");
+
+  openSheet(
+    `Apply to ${job.title}`,
+    `<p class="lead">${escapeHTML(job.clientName)} · ${escapeHTML(job.budget)}</p>
+     <div class="field">
+       <textarea id="applyNote" placeholder=" " rows="4" maxlength="400"></textarea>
+       <label for="applyNote">Note to client (optional)</label>
+     </div>
+     <p class="muted small" style="margin-bottom:12px">The client will see your profile and portfolio along with this note.</p>
+     <div class="form-actions">
+       <button class="btn btn-secondary" data-close>Cancel</button>
+       <button class="btn btn-primary" id="submitApply">Send proposal</button>
+     </div>`
+  );
+
+  $("submitApply").onclick = () => {
+    const note = $("applyNote").value.trim();
+    if (job.applicants.some((a) => a.userId === currentUser.id)) {
+      closeSheet();
+      return toast("You've already applied to this job.", "error");
+    }
+    job.applicants.push({ userId: currentUser.id, name: currentUser.name, note, at: new Date().toISOString(), status: "pending" });
+
+    // notify client via message thread if note present or start conversation
+    sendMessageInner(
+      currentUser.id,
+      job.clientId,
+      `Applied to "${job.title}"${note ? `:\n\n"${note}"` : "."}`
+    );
+
+    saveData();
+    closeSheet();
+    toast("Proposal sent");
+    renderJobs();
+    if (currentPage === "dashboard") renderDashboard();
+  };
+}
+
+function viewApplicants(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job || !isClient()) return;
+
+  const list = job.applicants;
+  if (!list.length) return toast("No proposals yet for this job.");
+
+  const items = list
+    .map((a) => {
+      const u = store.users.find((x) => x.id === a.userId) || { name: a.name, title: "Freelancer", skills: [] };
+      const ports = store.portfolios.filter((p) => p.userId === a.userId);
+      const isHired = job.hiredId === a.userId;
+      let statusBadge = "";
+      if (isHired) statusBadge = '<span class="tag hired">Hired</span>';
+      else if (a.status === "declined") statusBadge = '<span class="tag declined">Declined</span>';
+
+      return `
+      <div class="applicant">
+        ${avatarHTML(u.name, "avatar-sm")}
+        <div class="list-text">
+          <strong>${escapeHTML(u.name)} ${statusBadge}</strong>
+          <span>${escapeHTML(u.title || "Freelancer")} · ${ports.length} portfolio project${ports.length === 1 ? "" : "s"}</span>
+          ${a.note ? `<p class="note">"${escapeHTML(a.note)}"</p>` : ""}
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-secondary btn-sm" data-view-profile="${a.userId}">Profile</button>
+          ${
+            job.status === "open"
+              ? `<button class="btn btn-primary btn-sm" data-hire="${job.id}:${a.userId}">Hire</button>`
+              : `<button class="btn btn-secondary btn-sm" data-message-user="${a.userId}">Message</button>`
+          }
+        </div>
+      </div>`;
+    })
+    .join("");
+
+  openSheet(`Proposals for ${job.title}`, `<div class="list">${items}</div>`);
+}
+
+function hireFreelancer(jobId, userId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  const freelancer = store.users.find((u) => u.id === userId);
+  if (!job || !freelancer || !isClient()) return;
+
+  confirmSheet(
+    `Hire ${freelancer.name}?`,
+    `This moves "${job.title}" to In progress and updates all applicants.`,
+    "Hire freelancer",
+    () => {
+      job.status = "in progress";
+      job.hiredId = freelancer.id;
+      job.hiredName = freelancer.name;
+      job.applicants.forEach((a) => {
+        a.status = a.userId === freelancer.id ? "accepted" : "declined";
+      });
+
+      // System messages
+      sendMessageInner(
+        currentUser.id,
+        freelancer.id,
+        `🎉 You've been hired for "${job.title}"! Let's talk details here.`
+      );
+
+      saveData();
+      toast(`Hired ${freelancer.name}`);
+      renderJobs();
+      if (currentPage === "dashboard") renderDashboard();
+    },
+    false
+  );
+}
+
+function completeJob(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job || !isClient()) return;
+
+  confirmSheet(
+    "Mark project complete?",
+    `Mark "${job.title}" as completed. You can still message each other anytime.`,
+    "Mark complete",
+    () => {
+      job.status = "done";
+      if (job.hiredId) {
+        sendMessageInner(currentUser.id, job.hiredId, `✓ Marked "${job.title}" as complete. Thank you for your work!`);
+      }
+      saveData();
+      toast("Job marked complete");
+      renderJobs();
+    },
+    false
+  );
+}
+
+function closeJob(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job || !isClient()) return;
+  job.status = "closed";
+  saveData();
+  toast("Job closed");
+  renderJobs();
+}
+
+function reopenJob(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job || !isClient()) return;
+  job.status = "open";
+  saveData();
+  toast("Job reopened");
+  renderJobs();
+}
+
+function deleteJob(jobId) {
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job || !isClient()) return;
+
+  confirmSheet(
+    "Delete job post?",
+    `Permanently delete "${job.title}"? Applicants will no longer see it.`,
+    "Delete job",
+    () => {
+      store.jobs = store.jobs.filter((j) => j.id !== jobId);
+      saveData();
+      toast("Job deleted");
+      renderJobs();
+    }
+  );
+}
+
+/* =====================================================
+   MESSAGES
+   ===================================================== */
+
+function buildThreads() {
+  const map = new Map();
+  const myId = currentUser.id;
+
+  // messages involving current user
+  store.messages.forEach((m) => {
+    if (m.fromId !== myId && m.toId !== myId) return;
+    const otherId = m.fromId === myId ? m.toId : m.fromId;
+    const existing = map.get(otherId);
+
+    if (!existing || new Date(m.time) > new Date(existing.last.time)) {
+      const other = store.users.find((u) => u.id === otherId) || { name: m.otherName || "User" };
+      map.set(otherId, {
+        otherId,
+        otherName: other.name,
+        otherRole: other.role || "",
+        last: m,
+        unread: false,
+      });
+    }
+  });
+
+  // check unread flag per thread
+  for (const [otherId, thread] of map.entries()) {
+    thread.unread = store.messages.some((m) => m.fromId === otherId && m.toId === myId && !m.read);
+  }
+
+  return Array.from(map.values()).sort((a, b) => new Date(b.last.time) - new Date(a.last.time));
+}
+
+function renderMessages() {
+  const threads = buildThreads();
+  const threadContainer = $("threadList");
+
+  if (!threads.length) {
+    threadContainer.innerHTML = `<div class="empty"><strong>No messages</strong><span>Conversations appear here when you connect with clients or freelancers.</span></div>`;
+    $("conversation").innerHTML = `<div class="empty"><strong>Select a conversation</strong><span>Your messages will show up here.</span></div>`;
+    return;
+  }
+
+  // default to first thread if activeThreadId invalid or null
+  if (!activeThreadId || !threads.some((t) => t.otherId === activeThreadId)) {
+    activeThreadId = threads[0].otherId;
+  }
+
+  threadContainer.innerHTML = threads
+    .map(
+      (t) => `
+    <button class="thread ${t.otherId === activeThreadId ? "active" : ""}" data-thread="${t.otherId}">
+      ${avatarHTML(t.otherName, "avatar-sm")}
+      <div class="list-text">
+        <strong>${escapeHTML(t.otherName)}</strong>
+        <span>${escapeHTML(t.last.text)}</span>
+      </div>
+      ${t.unread ? '<span class="unread"></span>' : `<span class="list-meta">${timeAgo(t.last.time)}</span>`}
+    </button>`
+    )
+    .join("");
+
+  renderConversation(activeThreadId);
+}
+
+function renderConversation(otherId) {
+  const other = store.users.find((u) => u.id === otherId);
+  const otherName = other?.name || "User";
+  const convContainer = $("conversation");
+
+  // mark read
+  let changed = false;
+  store.messages.forEach((m) => {
+    if (m.fromId === otherId && m.toId === currentUser.id && !m.read) {
+      m.read = true;
+      changed = true;
+    }
+  });
+  if (changed) {
+    saveData();
+    updateBadge();
+  }
+
+  const threadMsgs = store.messages
+    .filter((m) => (m.fromId === currentUser.id && m.toId === otherId) || (m.fromId === otherId && m.toId === currentUser.id))
+    .sort((a, b) => new Date(a.time) - new Date(b.time));
+
+  const bubblesHTML = threadMsgs
+    .map((m) => {
+      const isMe = m.fromId === currentUser.id;
+      return `
+      <div class="bubble ${isMe ? "me" : "them"}">${escapeHTML(m.text)}</div>
+      <span class="bubble-time ${isMe ? "me" : ""}">${clockTime(m.time)}</span>`;
+    })
+    .join("");
+
+  convContainer.innerHTML = `
+    <div class="conv-head">
+      <button class="icon-btn back" id="backToThreads" aria-label="Back">
+        <svg viewBox="0 0 24 24"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+      </button>
+      ${avatarHTML(otherName, "avatar-sm")}
+      <div>
+        <strong>${escapeHTML(otherName)}</strong>
+        <span>${escapeHTML(other?.title || other?.role || "")}</span>
+      </div>
+      <button class="link" data-view-profile="${otherId}">View profile</button>
+    </div>
+    <div class="bubbles" id="bubblesBox">${bubblesHTML}</div>
+    <form class="composer" id="messageForm">
+      <textarea id="messageInput" placeholder="Write a message…" rows="1" required></textarea>
+      <button type="submit" class="send" aria-label="Send message">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </form>`;
+
+  const box = $("bubblesBox");
+  box.scrollTop = box.scrollHeight;
+
+  const textarea = $("messageInput");
+  textarea.oninput = () => {
+    textarea.style.height = "auto";
+    textarea.style.height = Math.min(textarea.scrollHeight, 120) + "px";
+  };
+  textarea.onkeydown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      $("messageForm").requestSubmit();
+    }
+  };
+
+  $("messageForm").onsubmit = (e) => {
+    e.preventDefault();
+    const text = textarea.value.trim();
+    if (!text) return;
+
+    sendMessageInner(currentUser.id, otherId, text);
+    saveData();
+    textarea.value = "";
+    textarea.style.height = "auto";
+    renderMessages();
+  };
+
+  $("backToThreads")?.addEventListener("click", () => {
+    $("chat").classList.remove("show-conv");
+  });
+}
+
+function sendMessageInner(fromId, toId, text) {
+  const msg = {
+    id: Date.now(),
+    fromId,
+    toId,
+    text,
+    time: new Date().toISOString(),
+    read: false,
+  };
+  store.messages.push(msg);
+  return msg;
+}
+
+function openThreadWith(otherId) {
+  activeThreadId = Number(otherId);
+  showPage("messages");
+  $("chat").classList.add("show-conv");
+}
+
+function updateBadge() {
+  const unread = unreadCount();
+  ["messageBadge", "tabBadge"].forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    if (unread > 0) {
+      el.textContent = unread > 99 ? "99+" : unread;
+      el.classList.remove("hidden");
+    } else {
+      el.classList.add("hidden");
+    }
+  });
+}
+
+/* =====================================================
+   PROFILE
+   ===================================================== */
+
+function loadProfile() {
+  currentSkills = Array.isArray(currentUser.skills) ? [...currentUser.skills] : [];
+
+  if (isFreelancer()) {
+    $("freelancerProfile").classList.remove("hidden");
+    $("clientProfile").classList.add("hidden");
+    $("profileTitle").value = currentUser.title || "";
+    $("profileBio").value = currentUser.bio || "";
+    renderSkills();
+  } else {
+    $("freelancerProfile").classList.add("hidden");
+    $("clientProfile").classList.remove("hidden");
+    $("clientCompany").value = currentUser.company || "";
+    $("clientBio").value = currentUser.bio || "";
+  }
+}
+
+function renderSkills() {
+  $("skillsList").innerHTML = currentSkills
+    .map(
+      (s, i) => `
+    <span class="chip">
+      ${escapeHTML(s)}
+      <button type="button" data-remove-skill="${i}" aria-label="Remove ${escapeHTML(s)}">×</button>
+    </span>`
+    )
+    .join("");
+}
+
+function addSkill() {
+  const val = $("skillInput").value.trim();
+  if (val && !currentSkills.some((s) => s.toLowerCase() === val.toLowerCase())) {
+    currentSkills.push(val);
+    $("skillInput").value = "";
+    renderSkills();
+  }
+}
+
+function saveFreelancerProfile(e) {
+  e.preventDefault();
+  currentUser.title = $("profileTitle").value.trim();
+  currentUser.bio = $("profileBio").value.trim();
+  currentUser.skills = [...currentSkills];
+  syncUserInStore();
+  toast("Profile updated");
+}
+
+function saveClientProfile(e) {
+  e.preventDefault();
+  currentUser.company = $("clientCompany").value.trim();
+  currentUser.bio = $("clientBio").value.trim();
+  syncUserInStore();
+  toast("Profile updated");
+}
+
+function syncUserInStore() {
+  const idx = store.users.findIndex((u) => u.id === currentUser.id);
+  if (idx !== -1) store.users[idx] = currentUser;
+  saveData();
+  setupUserInterface();
+}
+
+function openPublicProfile(userId) {
+  const user = store.users.find((u) => u.id === userId);
+  if (!user) return toast("User not found.", "error");
+
+  const ports = store.portfolios.filter((p) => p.userId === userId);
+  const skills = (user.skills || []).map((s) => `<span class="chip soft">${escapeHTML(s)}</span>`).join("");
+
+  const projectsHTML = ports.length
+    ? ports
+        .map(
+          (p) => `
+      <div class="pp-project">
+        <strong>${escapeHTML(p.title)}</strong>
+        <p>${escapeHTML(p.description)}</p>
+        ${p.link ? `<a href="${escapeHTML(safeUrl(p.link))}" target="_blank" rel="noopener" class="link-out">View project ↗</a>` : ""}
+      </div>`
+        )
+        .join("")
+    : '<p class="muted small">No portfolio projects added yet.</p>';
+
+  openSheet(
+    user.name,
+    `<div class="pp-head">
+       ${avatarHTML(user.name, "avatar-lg")}
+       <div>
+         <h3>${escapeHTML(user.name)}</h3>
+         <p class="muted">${escapeHTML(user.title || user.company || user.role)}</p>
+         <p class="muted small">${escapeHTML(user.email)}</p>
+       </div>
+     </div>
+     ${user.bio ? `<p style="white-space:pre-wrap;line-height:1.5;margin-bottom:16px">${escapeHTML(user.bio)}</p>` : ""}
+     ${skills ? `<div class="chips" style="margin-bottom:20px">${skills}</div>` : ""}
+     ${user.role === "Freelancer" ? `<div class="pp-section"><h4>Portfolio (${ports.length})</h4>${projectsHTML}</div>` : ""}
+     <div class="form-actions">
+       ${user.id !== currentUser.id ? `<button class="btn btn-primary" data-message-user="${user.id}">Send message</button>` : ""}
+     </div>`
+  );
+}
+
+/* =====================================================
+   PORTFOLIO
+   ===================================================== */
+
+function renderPortfolio() {
+  if (!isFreelancer()) return;
+  const list = store.portfolios.filter((p) => p.userId === currentUser.id);
+  const container = $("portfolioList");
+
+  if (!list.length) {
+    container.innerHTML = `<div class="empty"><strong>No portfolio projects</strong><span>Add your past work below so clients can see what you build.</span></div>`;
+    return;
+  }
+
+  container.innerHTML = list
+    .map(
+      (p) => `
+    <article class="card">
+      <div class="card-head">
+        <h3>${escapeHTML(p.title)}</h3>
+        <button class="icon-btn" data-delete-portfolio="${p.id}" aria-label="Delete project">
+          <svg viewBox="0 0 24 24"><path d="M9 3h6l1 2h4v2H4V5h4zm-3 5h12l-1 13H7z"/></svg>
+        </button>
+      </div>
+      <p class="desc" style="-webkit-line-clamp:6;line-clamp:6">${escapeHTML(p.description)}</p>
+      ${p.link ? `<div class="card-foot"><a href="${escapeHTML(safeUrl(p.link))}" target="_blank" rel="noopener" class="link-out">Visit project ↗</a></div>` : ""}
+    </article>`
+    )
+    .join("");
+}
+
+function addPortfolioItem(event) {
+  event.preventDefault();
+  const title = $("portfolioTitle").value.trim();
+  const description = $("portfolioDescription").value.trim();
+  const rawLink = $("portfolioLink").value.trim();
+  const error = $("portfolioError");
+  error.textContent = "";
+
+  if (!title) return setError(error, "Give the project a title.", "portfolioTitle");
+  if (description.length < 10) return setError(error, "Describe what you did in a sentence.", "portfolioDescription");
+
+  let link = null;
+  if (rawLink) {
+    link = safeUrl(rawLink.startsWith("http") ? rawLink : "https://" + rawLink);
+    if (!link) return setError(error, "Enter a valid URL starting with http:// or https://", "portfolioLink");
+  }
+
+  store.portfolios.unshift({
+    id: Date.now(),
+    userId: currentUser.id,
+    title,
+    description,
+    link,
+    createdAt: new Date().toISOString(),
+  });
+  saveData();
+  $("portfolioForm").reset();
+  toast("Project added");
+  renderPortfolio();
+}
+
+function deletePortfolioItem(id) {
+  confirmSheet(
+    "Delete portfolio project?",
+    "This permanently removes this project from your profile.",
+    "Delete project",
+    () => {
+      store.portfolios = store.portfolios.filter((p) => p.id !== id);
+      saveData();
+      toast("Project deleted");
+      renderPortfolio();
+    }
+  );
+}
+
+/* =====================================================
+   EVENT DELEGATION & ATTACHMENTS
+   ===================================================== */
+
+function initEvents() {
+  applyTheme();
+  migrate();
+  setupReveal();
+
+  // Navigation
+  document.addEventListener("click", (e) => {
+    const pageBtn = e.target.closest("[data-page]");
+    if (pageBtn && currentUser) {
+      showPage(pageBtn.dataset.page);
+      return;
+    }
+
+    const openJob = e.target.closest("[data-open-job]");
+    if (openJob) return openJobDetail(Number(openJob.dataset.openJob));
+
+    const apply = e.target.closest("[data-apply]");
+    if (apply) return applyToJob(Number(apply.dataset.apply));
+
+    const applicants = e.target.closest("[data-applicants]");
+    if (applicants) return viewApplicants(Number(applicants.dataset.applicants));
+
+    const hire = e.target.closest("[data-hire]");
+    if (hire) {
+      const [jId, uId] = hire.dataset.hire.split(":").map(Number);
+      return hireFreelancer(jId, uId);
+    }
+
+    const complete = e.target.closest("[data-complete-job]");
+    if (complete) return completeJob(Number(complete.dataset.completeJob));
+
+    const closeJobBtn = e.target.closest("[data-close-job]");
+    if (closeJobBtn) return closeJob(Number(closeJobBtn.dataset.closeJob));
+
+    const reopen = e.target.closest("[data-reopen-job]");
+    if (reopen) return reopenJob(Number(reopen.dataset.reopenJob));
+
+    const delJob = e.target.closest("[data-delete-job]");
+    if (delJob) return deleteJob(Number(delJob.dataset.deleteJob));
+
+    const openThread = e.target.closest("[data-open-thread], [data-thread]");
+    if (openThread) return openThreadWith(openThread.dataset.openThread || openThread.dataset.thread);
+
+    const msgUser = e.target.closest("[data-message-user]");
+    if (msgUser) {
+      closeSheet();
+      return openThreadWith(msgUser.dataset.messageUser);
+    }
+
+    const viewProf = e.target.closest("[data-view-profile]");
+    if (viewProf) return openPublicProfile(Number(viewProf.dataset.viewProfile));
+
+    const delPort = e.target.closest("[data-delete-portfolio]");
+    if (delPort) return deletePortfolioItem(Number(delPort.dataset.deletePortfolio));
+
+    const remSkill = e.target.closest("[data-remove-skill]");
+    if (remSkill) {
+      currentSkills.splice(Number(remSkill.dataset.removeSkill), 1);
+      return renderSkills();
+    }
+
+    if (e.target.closest("[data-close]")) return closeSheet();
+  });
+
+  // Password visibility
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-reveal]");
+    if (!btn) return;
+    const input = $(btn.dataset.reveal);
+    if (!input) return;
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    btn.textContent = show ? "Hide" : "Show";
+  });
+
+  // Landing / Auth controls
+  $("landingSignIn").onclick = () => showAuth("login");
+  $("pathFreelancer").onclick = () => showAuth("register", "Freelancer");
+  $("pathClient").onclick = () => showAuth("register", "Client");
+
+  $$('.path[data-role], .cta-band button[data-role]').forEach((b) => {
+    b.onclick = () => showAuth("register", b.dataset.role);
+  });
+
+  $("backToLanding").onclick = showLanding;
+  $("goRegister").onclick = showRegister;
+  $("goLogin").onclick = showLogin;
+
+  $("loginBox").onsubmit = login;
+  $("registerBox").onsubmit = createAccount;
+
+  $$('input[name="registerRole"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      updateRoleCopy();
+      syncSegmented(radio.closest(".segmented"));
+    });
+  });
+
+  // Filters
+  $("jobSearch").oninput = renderJobs;
+  $$('#jobStatusFilter input, #jobViewFilter input').forEach((r) => {
+    r.addEventListener("change", (e) => {
+      syncSegmented(e.target.closest(".segmented"));
+      renderJobs();
+    });
+  });
+
+  // Forms
+  $("postJobForm").onsubmit = postJob;
+  $("freelancerProfile").onsubmit = saveFreelancerProfile;
+  $("clientProfile").onsubmit = saveClientProfile;
+  $("portfolioForm").onsubmit = addPortfolioItem;
+
+  $("addSkillBtn").onclick = addSkill;
+  $("skillInput").onkeydown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addSkill();
+    }
+  };
+
+  // Account controls
+  $("themeToggle").onclick = toggleTheme;
+  $("themeToggleProfile").onclick = toggleTheme;
+  $("logoutBtn").onclick = logout;
+  $("logoutBtnProfile").onclick = logout;
+  $("deleteAccountBtn").onclick = deleteAccount;
+
+  // Segmented control initialization
+  $$(".segmented").forEach(syncSegmented);
+
+  // Keyboard accessibility for modals
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !$("sheet").classList.contains("hidden")) closeSheet();
+  });
+
+  // Restore existing session
+  restoreSession();
+}
+
+document.addEventListener("DOMContentLoaded", initEvents);
+</script>
+</body>
+</html>
